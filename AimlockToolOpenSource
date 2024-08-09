@@ -1,0 +1,102 @@
+local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+local Mouse = LocalPlayer:GetMouse()
+local RunService = game:GetService("RunService")
+local Camera = workspace.CurrentCamera
+
+local Tool = Instance.new("Tool")
+Tool.RequiresHandle = false
+Tool.Name = "DarkFigureX Aimlock"
+Tool.Parent = LocalPlayer.Backpack
+
+local aimEnabled = false
+local targetPlayer = nil
+
+local function getNearestPlayer()
+local nearestPlayer = nil
+local shortestDistance = math.huge
+
+for _, player in pairs(Players:GetPlayers()) do
+if player ~= LocalPlayer and player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
+local distance = (LocalPlayer.Character.HumanoidRootPart.Position - player.Character.HumanoidRootPart.Position).magnitude
+
+if distance < shortestDistance then
+nearestPlayer = player
+shortestDistance = distance
+end
+end
+end
+
+return nearestPlayer
+end
+
+local function aimLock()
+if not aimEnabled or not targetPlayer or not targetPlayer.Character or not targetPlayer.Character:FindFirstChild("HumanoidRootPart") then
+return
+end
+
+local targetPosition = targetPlayer.Character.HumanoidRootPart.Position
+Camera.CFrame = CFrame.new(Camera.CFrame.Position, targetPosition)
+end
+
+Tool.Equipped:Connect(function()
+aimEnabled = true
+targetPlayer = getNearestPlayer()
+RunService:BindToRenderStep("Aimlock", Enum.RenderPriority.Camera.Value + 1, aimLock)
+end)
+
+Tool.Unequipped:Connect(function()
+aimEnabled = false
+RunService:UnbindFromRenderStep("Aimlock")
+end)
+local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+local Mouse = LocalPlayer:GetMouse()
+local RunService = game:GetService("RunService")
+local Camera = workspace.CurrentCamera
+
+local Tool = Instance.new("Tool")
+Tool.RequiresHandle = false
+Tool.Name = "AimlockTool"
+Tool.Parent = LocalPlayer.Backpack
+
+local aimEnabled = false
+local targetPlayer = nil
+
+local function getNearestPlayer()
+local nearestPlayer = nil
+local shortestDistance = math.huge
+
+for _, player in pairs(Players:GetPlayers()) do
+if player ~= LocalPlayer and player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
+local distance = (LocalPlayer.Character.HumanoidRootPart.Position - player.Character.HumanoidRootPart.Position).magnitude
+
+if distance < shortestDistance then
+nearestPlayer = player
+shortestDistance = distance
+end
+end
+end
+
+return nearestPlayer
+end
+
+local function aimLock()
+if not aimEnabled or not targetPlayer or not targetPlayer.Character or not targetPlayer.Character:FindFirstChild("HumanoidRootPart") then
+return
+end
+
+local targetPosition = targetPlayer.Character.HumanoidRootPart.Position
+Camera.CFrame = CFrame.new(Camera.CFrame.Position, targetPosition)
+end
+
+Tool.Equipped:Connect(function()
+aimEnabled = true
+targetPlayer = getNearestPlayer()
+RunService:BindToRenderStep("Aimlock", Enum.RenderPriority.Camera.Value + 1, aimLock)
+end)
+
+Tool.Unequipped:Connect(function()
+aimEnabled = false
+RunService:UnbindFromRenderStep("Aimlock")
+end)
