@@ -309,7 +309,7 @@ function library.Create(options)
 	
 	local videoFrame = Instance.new("VideoFrame")
 	videoFrame.Position = UDim2.new(0.053703703, 0, 0.499999881, 0)
-	videoFrame.Size = UDim2.new(0, 15, 0, 15)
+	videoFrame.Size = UDim2.new(0, 28, 0, 26)
     videoFrame.Parent = LogoHub
     videoFrame.Looped = true
     videoFrame.Video = "rbxassetid://5608297917" -- add an asset ID to this
